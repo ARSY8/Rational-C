@@ -1,6 +1,18 @@
 #pragma once
 
-#include "Rational.h"
+
+typedef struct {
+	int numerator;
+	int denominator;
+} Rational;
+
+
+void run_all_tests(void);
+void test_arithmetic_and_create(void);
+void test_to_int(void);
+void test_to_float(void);
+void test_to_str(void);
+void test_to_str(void);
 
 
 int greatest_common_divisor(int a, int b);

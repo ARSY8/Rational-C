@@ -1,4 +1,7 @@
 #include <math.h>
+#include <stdio.h>
+#include <assert.h>
+#include <stdlib.h>
 #include "rational_numbers.h"
 
 
@@ -8,83 +11,71 @@ int greatest_common_divisor(int a, int b) {
 		b = a % b;
 		a = temp;
 	}
-	return a;
+	return abs(a);
 }
 
 //Начало арифметики
 Rational add(Rational a, Rational b) {
-	Rational result;
+
+	int numerator;
+	int denominator;
 
 	if (a.denominator == b.denominator) {
-		result.numerator = a.numerator + b.numerator;
-		result.denominator = a.denominator;
+		numerator = a.numerator + b.numerator;
+		denominator = a.denominator;
 	}
 	else {
-		result.numerator = a.numerator * b.denominator + b.numerator * a.denominator;
-		result.denominator = a.denominator * b.denominator;
+		numerator = a.numerator * b.denominator + b.numerator * a.denominator;
+		denominator = a.denominator * b.denominator;
 	}
 
-	int gcd = greatest_common_divisor(result.numerator, result.denominator);
-
-	result.numerator = result.numerator / gcd;
-	result.denominator = result.denominator / gcd;
-
-	return result;
+	return create(numerator, denominator);
 }
 
 Rational subtract(Rational a, Rational b) {
-	Rational result;
+	int numerator;
+	int denominator;
 
 	if (a.denominator == b.denominator) {
-		result.numerator = a.numerator - b.numerator;
-		result.denominator = a.denominator;
+		numerator = a.numerator - b.numerator;
+		denominator = a.denominator;
 	}
 	else {
-		result.numerator = a.numerator * b.denominator - b.numerator * a.denominator;
-		result.denominator = a.denominator * b.denominator;
+		numerator = a.numerator * b.denominator - b.numerator * a.denominator;
+		denominator = a.denominator * b.denominator;
 	}
 
-	int gcd = greatest_common_divisor(result.numerator, result.denominator);
-
-	result.numerator = result.numerator / gcd;
-	result.denominator = result.denominator / gcd;
-
-	return result;
+	return create(numerator, denominator);
 }
 
 Rational multiply(Rational a, Rational b) {
-	Rational result;
+	int numerator;
+	int denominator;
 
-	result.numerator = a.numerator * b.numerator;
-	result.denominator = a.denominator * b.denominator;
+	numerator = a.numerator * b.numerator;
+	denominator = a.denominator * b.denominator;
 
-	int gcd = greatest_common_divisor(result.numerator, result.denominator);
-
-	result.numerator = result.numerator / gcd;
-	result.denominator = result.denominator / gcd;
-
-	return result;
+	return create(numerator, denominator);
 }
 
 Rational divide(Rational a, Rational b) {
-	Rational result;
+	int numerator;
+	int denominator;
 
-	result.numerator = a.numerator * b.denominator;
-	result.denominator = a.denominator * b.numerator;
+	numerator = a.numerator * b.denominator;
+	denominator = a.denominator * b.numerator;
 
-	int gcd = greatest_common_divisor(result.numerator, result.denominator);
-
-	result.numerator = result.numerator / gcd;
-	result.denominator = result.denominator / gcd;
-
-	return result;
+	return create(numerator, denominator);
 }
 
 Rational power(Rational r, int power) {
-	Rational result;
+	int numerator = 1;
+	int denominator = 1;
 
-	result.numerator = 1;
-	result.denominator = 1;
+	if (r.denominator == 0) {
+		printf("Деление на ноль не допустимо.");
+		abort();
+	}
 
 	if (power != 0) {
 		int numer = r.numerator;
@@ -93,26 +84,34 @@ Rational power(Rational r, int power) {
 		int abs_power = power < 0 ? -power : power;
 
 		for (int i = 0; i < abs_power; i++) {
-			result.numerator *= numer;
-			result.denominator *= denom;
+			numerator *= numer;
+			denominator *= denom;
 		}
 		if (power < 0) {
-			int temp = result.denominator;
-			result.denominator = result.numerator;
-			result.numerator = temp;
+			int temp = denominator;
+			denominator = numerator;
+			numerator = temp;
 		}
-		int gcd = greatest_common_divisor(result.numerator, result.denominator);
-		result.numerator = result.numerator / gcd;
-		result.denominator = result.denominator / gcd;
 	}
-	return result;
+	return create(numerator, denominator);
 }
 //Конец арифметики
 
 Rational create(int numer, int denom) {
+
+	if (denom == 0) {
+    	printf("Ошибка: знаменатель не может быть равен нулю.\n");
+    	abort();
+	}
+	
 	Rational result;
 	result.numerator = numer;
 	result.denominator = denom;
+
+	int gcd = greatest_common_divisor(result.numerator, result.denominator);
+
+	result.numerator = result.numerator / gcd;
+	result.denominator = result.denominator / gcd;
 
 	return result;
 }
