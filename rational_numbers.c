@@ -135,20 +135,19 @@ Rational create(int numer, int denom) {
 
 int compare(Rational a, Rational b) {
 
-	if (a.denominator == 0 || b.denominator) {
+	if (a.denominator == 0 || b.denominator == 0) {
 		printf("Ошибка: деление на ноль\n");
 		abort();
 	}
 
-	if (a.denominator != b.denominator) {
-		a.numerator *= b.denominator;
-		b.numerator *= a.denominator;
-	}
-	if (a.numerator == b.numerator) {
+	float first = (float)a.numerator / a.denominator;
+	float second = (float)b.numerator / b.denominator;
+
+	if ( first == second) {
 		return 0;
 	}
 	else {
-		return a.numerator < b.numerator ? -1 : 1;
+		return first < second ? -1 : 1;
 	}
 }
 
