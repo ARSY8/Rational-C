@@ -17,6 +17,11 @@ int greatest_common_divisor(int a, int b) {
 //Начало арифметики
 Rational add(Rational a, Rational b) {
 
+	if (a.denominator == 0 || b.denominator == 0) {
+		printf("Ошибка: деление на ноль\n");
+		abort();
+	}
+
 	int numerator;
 	int denominator;
 
@@ -33,6 +38,12 @@ Rational add(Rational a, Rational b) {
 }
 
 Rational subtract(Rational a, Rational b) {
+
+	if (a.denominator == 0 || b.denominator == 0) {
+		printf("Ошибка: деление на ноль\n");
+		abort();
+	}
+
 	int numerator;
 	int denominator;
 
@@ -49,21 +60,27 @@ Rational subtract(Rational a, Rational b) {
 }
 
 Rational multiply(Rational a, Rational b) {
-	int numerator;
-	int denominator;
 
-	numerator = a.numerator * b.numerator;
-	denominator = a.denominator * b.denominator;
+	if (a.denominator == 0 || b.denominator == 0) {
+		printf("Ошибка: деление на ноль\n");
+		abort();
+	}
+
+	int numerator = a.numerator * b.numerator;
+	int denominator = a.denominator * b.denominator;
 
 	return create(numerator, denominator);
 }
 
 Rational divide(Rational a, Rational b) {
-	int numerator;
-	int denominator;
 
-	numerator = a.numerator * b.denominator;
-	denominator = a.denominator * b.numerator;
+	if (a.denominator == 0 || b.denominator == 0) {
+		printf("Ошибка: деление на ноль\n");
+		abort();
+	}
+	
+	int numerator = a.numerator * b.denominator;
+	int denominator = a.denominator * b.numerator;
 
 	return create(numerator, denominator);
 }
@@ -117,6 +134,12 @@ Rational create(int numer, int denom) {
 }
 
 int compare(Rational a, Rational b) {
+
+	if (a.denominator == 0 || b.denominator) {
+		printf("Ошибка: деление на ноль\n");
+		abort();
+	}
+
 	if (a.denominator != b.denominator) {
 		a.numerator *= b.denominator;
 		b.numerator *= a.denominator;
@@ -132,7 +155,7 @@ int compare(Rational a, Rational b) {
 int to_int(Rational r) {
 	if (r.denominator == 0) {
 		printf("Ошибка: деление на ноль\n");
-		return 1;
+		abort();
 	}
 	else {
 		return r.numerator / r.denominator;
@@ -142,14 +165,20 @@ int to_int(Rational r) {
 float to_float(Rational r) {
 	if (r.denominator == 0) {
 		printf("Ошибка: деление на ноль\n");
-		return 1;
+		abort();
 	}
 	else {
-		return (float)r.numerator / (float)r.denominator;
+		return (float)r.numerator / r.denominator;
 	}
 }
 
 void to_str(Rational r) {
+
+	if (r.denominator == 0) {
+		printf("Ошибка: деление на ноль\n");
+		abort();
+	}
+
 	printf("\n%d/%d\n", r.numerator, r.denominator);
 }
 
