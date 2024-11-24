@@ -22,17 +22,8 @@ Rational add(Rational a, Rational b) {
 		abort();
 	}
 
-	int numerator;
-	int denominator;
-
-	if (a.denominator == b.denominator) {
-		numerator = a.numerator + b.numerator;
-		denominator = a.denominator;
-	}
-	else {
-		numerator = a.numerator * b.denominator + b.numerator * a.denominator;
-		denominator = a.denominator * b.denominator;
-	}
+	int numerator = a.numerator * b.denominator + b.numerator * a.denominator;
+	int denominator = a.denominator * b.denominator;
 
 	return create(numerator, denominator);
 }
@@ -44,17 +35,8 @@ Rational subtract(Rational a, Rational b) {
 		abort();
 	}
 
-	int numerator;
-	int denominator;
-
-	if (a.denominator == b.denominator) {
-		numerator = a.numerator - b.numerator;
-		denominator = a.denominator;
-	}
-	else {
-		numerator = a.numerator * b.denominator - b.numerator * a.denominator;
-		denominator = a.denominator * b.denominator;
-	}
+	int numerator = a.numerator * b.denominator - b.numerator * a.denominator;
+	int denominator  = a.denominator * b.denominator;
 
 	return create(numerator, denominator);
 }
