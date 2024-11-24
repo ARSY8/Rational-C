@@ -94,22 +94,22 @@ Rational power(Rational r, int power) {
 		abort();
 	}
 
-	if (power != 0) {
-		int numer = r.numerator;
-		int denom = r.denominator;
+	int abs_power = power < 0 ? -power : power;
 
-		int abs_power = power < 0 ? -power : power;
+	int numer = r.numerator;
+	int denom = r.denominator;
 
-		for (int i = 0; i < abs_power; i++) {
-			numerator *= numer;
-			denominator *= denom;
-		}
-		if (power < 0) {
-			int temp = denominator;
-			denominator = numerator;
-			numerator = temp;
-		}
+	for (int i = 0; i < abs_power; i++) {
+		numerator *= numer;
+		denominator *= denom;
 	}
+
+	if (power < 0) {
+		int temp = denominator;
+		denominator = numerator;
+		numerator = temp;
+	}
+
 	return create(numerator, denominator);
 }
 //Конец арифметики
