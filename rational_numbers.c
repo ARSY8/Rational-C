@@ -122,14 +122,14 @@ int compare(Rational a, Rational b) {
 		abort();
 	}
 
-	float first = (float)a.numerator / a.denominator;
-	float second = (float)b.numerator / b.denominator;
+	int first_numerator = a.numerator * b.denominator;
+	int second_numerator = b.numerator * a.denominator;
 
-	if ( first == second) {
+	if ( first_numerator == second_numerator) {
 		return 0;
 	}
 	else {
-		return first < second ? -1 : 1;
+		return first_numerator < second_numerator ? -1 : 1;
 	}
 }
 
