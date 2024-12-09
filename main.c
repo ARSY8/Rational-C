@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "rational_numbers.h"
+#include "test_rational.h"
 
 
 int main(void) {

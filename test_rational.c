@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <stdlib.h>
 #include "rational_numbers.h"
+#include "test_rational.h"
 
 
 void run_all_tests(void) {
@@ -28,6 +29,7 @@ void test_arithmetic_and_create(void) {
     int second_den = (rand() % 100) + 1;
 
     Rational first = create(first_num, first_den);
+    greatest_common_divisor(first_num, first_num);
     Rational second = create(second_num, second_den);
 
     Rational addition = add(first, second);
